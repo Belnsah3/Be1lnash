@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💕 Любовная открытка 💕</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ff6b9d, #ff8fab, #ffb3c6, #ffc8dd);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Анимированные сердечки на фоне */
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(45deg);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .heart:before,
+        .heart:after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            left: -10px;
+            top: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            transform: rotate(-90deg);
+            transform-origin: 10px 10px;
+        }
+        
+        .heart:after {
+            left: 0;
+            top: -10px;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(45deg); }
+            50% { transform: translateY(-20px) rotate(45deg); }
+        }
+        
+        .heart:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .heart:nth-child(2) { left: 20%; animation-delay: 1s; }
+        .heart:nth-child(3) { left: 30%; animation-delay: 2s; }
+        .heart:nth-child(4) { left: 40%; animation-delay: 3s; }
+        .heart:nth-child(5) { left: 50%; animation-delay: 4s; }
+        .heart:nth-child(6) { left: 60%; animation-delay: 5s; }
+        .heart:nth-child(7) { left: 70%; animation-delay: 1.5s; }
+        .heart:nth-child(8) { left: 80%; animation-delay: 2.5s; }
+        .heart:nth-child(9) { left: 90%; animation-delay: 3.5s; }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            animation: slideIn 1s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: #ff6b9d;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .lock-container {
+            margin: 30px 0;
+            padding: 30px;
+            background: linear-gradient(145deg, #f0f0f0, #ffffff);
+            border-radius: 20px;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .lock-title {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .code-input {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .digit-input {
+            width: 50px;
+            height: 50px;
+            border: 3px solid #ff6b9d;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff6b9d;
+            background: white;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+        
+        .digit-input:focus {
+            border-color: #ff8fab;
+            box-shadow: 0 0 15px rgba(255, 107, 157, 0.3);
+            transform: scale(1.1);
+        }
+        
+        .digit-input.filled {
+            background: linear-gradient(145deg, #ff6b9d, #ff8fab);
+            color: white;
+            animation: digitGlow 0.5s ease-out;
+        }
+        
+        @keyframes digitGlow {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
+        .check-button {
+            background: linear-gradient(145deg, #ff6b9d, #ff8fab);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(255, 107, 157, 0.3);
+        }
+        
+        .check-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
+        }
+        
+        .check-button:active {
+            transform: translateY(0);
+        }
+        
+        .congratulations {
+            display: none;
+            margin-top: 30px;
+            padding: 30px;
+            background: linear-gradient(145deg, #ff6b9d, #ff8fab);
+            border-radius: 20px;
+            color: white;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .congratulations.show {
+            display: block;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .congratulations-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.3rem;
+            line-height: 1.8;
+            text-align: left;
+            animation: textReveal 2s ease-out;
+        }
+        
+        @keyframes textReveal {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .hearts-decoration {
+            font-size: 2rem;
+            margin: 20px 0;
+            animation: heartBeat 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        .success-message {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            animation: bounce 1s ease-out;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        .error-message {
+            color: #ff4757;
+            font-weight: 600;
+            margin-top: 15px;
+            animation: shake 0.5s ease-in-out;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .title {
+                font-size: 2.5rem;
+            }
+            
+            .digit-input {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .code-input {
+                gap: 10px;
+            }
+            
+            .congratulations-text {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Анимированные сердечки на фоне -->
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    
+    <div class="container">
+        <h1 class="title">💕 Моя Любимая 💕</h1>
+        
+        <div class="lock-container">
+            <h2 class="lock-title">🔐 Введите код для открытия поздравления</h2>
+            <div class="code-input">
+                <input type="text" class="digit-input" maxlength="1" data-index="0">
+                <input type="text" class="digit-input" maxlength="1" data-index="1">
+                <input type="text" class="digit-input" maxlength="1" data-index="2">
+                <input type="text" class="digit-input" maxlength="1" data-index="3">
+                <input type="text" class="digit-input" maxlength="1" data-index="4">
+                <input type="text" class="digit-input" maxlength="1" data-index="5">
+                <input type="text" class="digit-input" maxlength="1" data-index="6">
+            </div>
+            <button class="check-button" onclick="checkCode()">Проверить код</button>
+            <div id="error-message" class="error-message"></div>
+        </div>
+        
+        <div id="congratulations" class="congratulations">
+            <div class="success-message">🎉 Поздравляю! Код верный! 🎉</div>
+            <div class="hearts-decoration">💖💕💖💕💖</div>
+            <div class="congratulations-text">
+                Ну что ж любимая, вот и настал тот самый день<br><br>
+                Мы смогли преодолеть с тобой все проблемы, которые нас преследовали, но мы и с ними всеми справились и будем справляться. Никакая проблема и ссоры нас не смогут разлучить, мы преодолеем с тобой очень большой путь.<br><br>
+                А вообще, я очень рад что повстречал тебя. По началу конечно не думал что у нас что-то получится, но теперь я понял что ошибался.<br><br>
+                И ты помогла мне справиться с моими проблемами и ты смогла меня изменить в лучшую сторону, дала мне снова надежду на то что я могу снова быть счастливым и любимым мальчиком.<br><br>
+                Я очень сильно хочу с тобой прожить долгую и счастливую жизнь.<br><br>
+                Спасибо тебе за твое появление в жизни. Я очень ценю что ты появилась в моей жизни и добавила в нее свою любовь 🥰🥹❤️
+            </div>
+            <div class="hearts-decoration">💕💖💕💖💕💖💕</div>
+        </div>
+    </div>
+    
+    <script>
+        const correctCode = "9629126";
+        const digitInputs = document.querySelectorAll('.digit-input');
+        const congratulations = document.getElementById('congratulations');
+        const errorMessage = document.getElementById('error-message');
+        
+        // Автоматический переход к следующему полю при вводе
+        digitInputs.forEach((input, index) => {
+            input.addEventListener('input', function(e) {
+                const value = e.target.value;
+                
+                // Проверяем что введена только цифра
+                if (!/^\d$/.test(value)) {
+                    e.target.value = '';
+                    return;
+                }
+                
+                // Добавляем класс заполненности
+                if (value) {
+                    e.target.classList.add('filled');
+                } else {
+                    e.target.classList.remove('filled');
+                }
+                
+                // Переходим к следующему полю
+                if (value && index < digitInputs.length - 1) {
+                    digitInputs[index + 1].focus();
+                }
+            });
+            
+            // Обработка клавиш
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                    digitInputs[index - 1].focus();
+                }
+            });
+        });
+        
+        function checkCode() {
+            const enteredCode = Array.from(digitInputs).map(input => input.value).join('');
+            
+            if (enteredCode.length !== 7) {
+                showError('Пожалуйста, введите все 7 цифр');
+                return;
+            }
+            
+            if (enteredCode === correctCode) {
+                // Правильный код
+                congratulations.classList.add('show');
+                congratulations.scrollIntoView({ behavior: 'smooth' });
+                errorMessage.textContent = '';
+                
+                // Добавляем эффект успеха
+                digitInputs.forEach(input => {
+                    input.style.borderColor = '#4CAF50';
+                    input.style.background = 'linear-gradient(145deg, #4CAF50, #45a049)';
+                    input.style.color = 'white';
+                });
+            } else {
+                // Неправильный код
+                showError('Неверный код! Попробуйте еще раз 💔');
+                
+                // Эффект ошибки
+                digitInputs.forEach(input => {
+                    input.style.borderColor = '#ff4757';
+                    input.style.animation = 'shake 0.5s ease-in-out';
+                });
+                
+                setTimeout(() => {
+                    digitInputs.forEach(input => {
+                        input.style.animation = '';
+                        input.style.borderColor = '#ff6b9d';
+                        input.style.background = 'white';
+                        input.style.color = '#ff6b9d';
+                    });
+                }, 500);
+            }
+        }
+        
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+            
+            setTimeout(() => {
+                errorMessage.style.display = 'none';
+            }, 3000);
+        }
+        
+        // Фокус на первое поле при загрузке
+        window.addEventListener('load', () => {
+            digitInputs[0].focus();
+        });
+        
+        // Обработка Enter для проверки кода
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                checkCode();
+            }
+        });
+    </script>
+</body>
+</html>
